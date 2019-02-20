@@ -1,0 +1,22 @@
+Gameplay:
+Torches that can light bombs.
+Destructable crates.
+Destructable objects of different materials that are impervious to some damage but susceptible to others. (Metal doors, metal crates)
+Bombs can destroy cannons.
+Water buckets that can be picked up and can douse bombs and cannons and torches.
+SpikeWalls to place enemies
+
+GUI:
+Achievement Screen.
+Fun Speech bubbles for characters (like a thought in that moment in time)
+
+Aesthetics:
+Varieties of contstruction blocks
+
+Meta:
+Achievement for beating the game without getting any enemies killed(Pacifist).
+Achievement for beating the game without letting any enemies live(Blood Thristy).
+Achievement for beating the game without letting any friendlies die(Savior).
+
+3D Assets:
+Broken Wooden Crate
