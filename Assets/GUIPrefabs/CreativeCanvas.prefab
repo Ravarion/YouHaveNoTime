@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 223379889145240624}
   - component: {fileID: 114259137278168128}
   - component: {fileID: 114883449035047708}
+  - component: {fileID: 114966750500721392}
   m_Layer: 5
   m_Name: CreativeCanvas
   m_TagString: Untagged
@@ -713,7 +714,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114887960586924118}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114966750500721392}
+        m_MethodName: CopyMapToClipboard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114941999023634270
@@ -743,6 +755,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114966750500721392
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1009083952376856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b0b850943fc2d54e9def1d0c65aee12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114972289597468476
 MonoBehaviour:
   m_ObjectHideFlags: 1

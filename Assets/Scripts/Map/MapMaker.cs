@@ -177,7 +177,7 @@ public class MapMaker : MonoBehaviour {
 #if !UNITY_EDITOR && !UNITY_ANDROID && !UNITY_WEBGL
         pFileName = "You Have No Time_Data/" + pFileName;
 #endif
-#if !UNITY_ANDROID && !UNITY_WEBGL
+#if UNITY_EDITOR || (!UNITY_ANDROID && !UNITY_WEBGL)
         gameController.SendDebugText("Saving to File.");
         if (!File.Exists(pFileName) || allowOverwrite)
         {
@@ -189,7 +189,7 @@ public class MapMaker : MonoBehaviour {
 
             // If we're in the editor, refresh so that we can see the new file
 #if UNITY_EDITOR
-            UnityEditor.AssetDatabase.Refresh();
+            AssetDatabase.Refresh();
 #endif
         }
         else
