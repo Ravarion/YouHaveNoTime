@@ -16,7 +16,8 @@ public class HowToPlayTextSwapper : MonoBehaviour {
             newText += "Move with the <color=red>Left Joystick</color>\n\n";
             newText += "Pick up people and objects with <color=red>A</color>\n\n";
             newText += "Rotate people and objects with <color=red>LB and RB</color>\n\n";
-            newText += "Finish the level early for a higher score by pressing <color=red>Y</color>";
+            newText += "Finish the level early for a higher score by pressing <color=red>Y</color>\n\n";
+            newText += "You can edit the map you're playing by pressing <color=red>Start</color>";
             howToPlayText.text = newText;
         }
         else
@@ -27,6 +28,7 @@ public class HowToPlayTextSwapper : MonoBehaviour {
             newText += "Pick up people and objects with <color=red>F</color>\n\n";
             newText += "Rotate people and objects with <color=red>Z and C</color>\n\n";
             newText += "Finish the level early for a higher score by pressing <color=red>Y</color>";
+            newText += "You can edit the map you're playing by pressing <color=red>Tab</color>";
             howToPlayText.text = newText;
         }
 	}

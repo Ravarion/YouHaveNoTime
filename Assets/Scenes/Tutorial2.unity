@@ -158,21 +158,6 @@ Prefab:
       propertyPath: timeText
       value: 
       objectReference: {fileID: 2036255003}
-    - target: {fileID: 114718197722154724, guid: 7121b7c378147a7478a4e3bf405e1934,
-        type: 2}
-      propertyPath: superHotMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114334187754212158, guid: 7121b7c378147a7478a4e3bf405e1934,
-        type: 2}
-      propertyPath: mapSpawnFile
-      value: 
-      objectReference: {fileID: 4900000, guid: c90f7b057e9c8544b8e6eeb20ed58e2f, type: 3}
-    - target: {fileID: 114718197722154724, guid: 7121b7c378147a7478a4e3bf405e1934,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7121b7c378147a7478a4e3bf405e1934, type: 2}
   m_IsPrefabAsset: 0

@@ -156,6 +156,7 @@ MonoBehaviour:
     type: 2}
   scenesNotScored: 1
   creativeMode: 0
+  debugMode: 0
 --- !u!114 &114718197722154724
 MonoBehaviour:
   m_ObjectHideFlags: 1

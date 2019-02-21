@@ -14,6 +14,7 @@ public class CreativeModeController : MonoBehaviour {
     private GameObject[][] spawnLists;
     private MapMaker mapMaker;
     private Grabbing grabbing;
+    private int[] iteratorMemory;
     private int listIterator = 0;
     private int objIterator = 0;
     private GameObject map;
@@ -35,6 +36,11 @@ public class CreativeModeController : MonoBehaviour {
         spawnLists[1] = mapMaker.actorList;
         spawnLists[2] = mapMaker.hazardList;
         spawnLists[3] = mapMaker.floorList;
+        iteratorMemory = new int[spawnLists.Length];
+        for(int i = 0; i < iteratorMemory.Length; i++)
+        {
+            iteratorMemory[i] = 0;
+        }
 
         creativeUIController = FindObjectOfType<CreativeUIController>();
         if(gameController.creativeMode)
@@ -112,6 +118,7 @@ public class CreativeModeController : MonoBehaviour {
             {
                 objIterator = 0;
             }
+            iteratorMemory[listIterator] = objIterator;
             SendUIUpdate();
         }
 
@@ -123,6 +130,7 @@ public class CreativeModeController : MonoBehaviour {
             {
                 objIterator = spawnLists[listIterator].Length - 1;
             }
+            iteratorMemory[listIterator] = objIterator;
             SendUIUpdate();
         }
 
@@ -130,11 +138,11 @@ public class CreativeModeController : MonoBehaviour {
         if (inputController.GetOnAxisDown("DpadVertical"))
         {
             listIterator -= 1;
-            objIterator = 0;
             if (listIterator < 0)
             {
                 listIterator = spawnLists.Length - 1;
             }
+            objIterator = iteratorMemory[listIterator];
             SendUIUpdate();
         }
 
@@ -142,11 +150,11 @@ public class CreativeModeController : MonoBehaviour {
         if (inputController.GetOnAxisUp("DpadVertical"))
         {
             listIterator += 1;
-            objIterator = 0;
             if (listIterator >= spawnLists.Length)
             {
                 listIterator = 0;
             }
+            objIterator = iteratorMemory[listIterator];
             SendUIUpdate();
         }
     } // End Update

@@ -166,22 +166,26 @@ public class MapMaker : MonoBehaviour {
             toWrite += piece.objName;
             toWrite += "/";
         }
-#if UNITY_ANDROID
-        PlayerPrefs.SetString(pFileName, toWrite);
+        //gameController.SendDebugText("About to Save Map.");
+#if UNITY_ANDROID || UNITY_WEBGL
+        gameController.SendDebugText("Saving to PlayerPrefs: " + "Assets/Resources/" + pFileName);
+        PlayerPrefs.SetString("Assets/Resources/" + pFileName, toWrite);
 #endif
 #if UNITY_EDITOR
         pFileName = "Assets/Resources/" + pFileName;
 #endif
-#if !UNITY_EDITOR && !UNITY_ANDROID
+#if !UNITY_EDITOR && !UNITY_ANDROID && !UNITY_WEBGL
         pFileName = "You Have No Time_Data/" + pFileName;
 #endif
-#if !UNITY_ANDROID
+#if !UNITY_ANDROID && !UNITY_WEBGL
+        gameController.SendDebugText("Saving to File.");
         if (!File.Exists(pFileName) || allowOverwrite)
         {
             StreamWriter file = new StreamWriter(pFileName);
             file.WriteLine(toWrite);
             file.Close();
             print("Saved " + pFileName);
+            gameController.SendDebugText("Saved to File.");
 
             // If we're in the editor, refresh so that we can see the new file
 #if UNITY_EDITOR
@@ -190,32 +194,48 @@ public class MapMaker : MonoBehaviour {
         }
         else
         {
+            gameController.SendDebugText("Failed to save to File.");
             print(pFileName + " already exists");
             return false;
         }
 #endif
         return true;
-    }
+    } // End SaveMap
 
     public void DestroyMapObject()
     {
         DestroyImmediate(GetMap());
     }
 
+    public string GetMapText(Scene scene, bool save)
+    {
+        return GetMapText(scene.name, save);
+    }
+
     public string GetMapText(Scene scene)
     {
-        return GetMapText(scene.name);
+        return GetMapText(scene.name, false);
     }
 
     public string GetMapText(string levelPath)
     {
+        return GetMapText(levelPath, false);
+    }
+
+    public string GetMapText(string levelPath, bool save)
+    {
         // Remove any folder names, and remove the .unity at the end
-        string mapName = levelPath.Split('/')[levelPath.Split('/').Length - 1].Split('.')[0];
+        string mapName = GetMapName(levelPath);
+        if (save)
+        {
+            SaveMap(mapName);
+        }
         string mapText = "";
-#if UNITY_ANDROID
+#if UNITY_ANDROID || UNITY_WEBGL
+        gameController.SendDebugText("Loading from PlayerPrefs: " + "Assets/Resources/" + mapName + ".txt");
         mapText = PlayerPrefs.GetString("Assets/Resources/" + mapName + ".txt");
 #endif
-#if !UNITY_ANDROID
+#if !UNITY_ANDROID && !UNITY_WEBGL
         if (mapText == "")
         {
             if (File.Exists("You Have No Time_Data/" + mapName + ".txt"))
@@ -235,6 +255,12 @@ public class MapMaker : MonoBehaviour {
             }
         }
         return mapText;
+    }
+
+    public string GetMapName(string levelPath)
+    {
+        string mapName = levelPath.Split('/')[levelPath.Split('/').Length - 1].Split('.')[0];
+        return mapName;
     }
 
     private void LoadLevelSelectMaps()

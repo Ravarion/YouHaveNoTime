@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class MusicController : MonoBehaviour {
 
+    private static MusicController instance;
+
+    public static MusicController Instance { get { return instance; } }
+
     public AudioClip menuMusic;
     public AudioClip inGameMusic;
 
@@ -12,12 +16,13 @@ public class MusicController : MonoBehaviour {
 
     void Start()
     {
-        if(FindObjectsOfType<MusicController>().Length > 1)
+        if(instance != null && instance != this)
         {
             Destroy(gameObject);
         }
         else
         {
+            instance = this;
             DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoaded;
         }

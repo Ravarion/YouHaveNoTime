@@ -13,9 +13,11 @@ public class GameController : MonoBehaviour {
     public int scenesNotScored = 1;
 
     public bool creativeMode = false;
+    public bool debugMode = false;
 
     private GameObject player;
     private MapMaker mapMaker;
+    private Text debugText;
     private int totalAlliesSaved;
     private int totalAlliesLost;
     private int totalEnemiesSaved;
@@ -27,6 +29,8 @@ public class GameController : MonoBehaviour {
     private int fallenEnemies;
 
     private float extraTime = 0;
+
+    private static List<string> debugLog = new List<string>();
 
     public void StartGame()
     {
@@ -128,6 +132,11 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    public void DeleteCustomMaps()
+    {
+
+    }
+
     public void ClearAllData()
     {
         PlayerPrefs.DeleteAll();
@@ -190,6 +199,31 @@ public class GameController : MonoBehaviour {
         LoadCurrentScene();
     }
 
+    public void SendDebugText(string text)
+    {
+        debugLog.Add(text);
+        if(debugLog.Count > 5)
+        {
+            debugLog.RemoveAt(0);
+        }
+        if(debugMode)
+        {
+            debugText.text = "";
+            foreach(string log in debugLog)
+            {
+                debugText.text += log + "\n";
+            }
+        }
+    }
+
+    void Awake()
+    {
+        if(GameObject.Find("DebugText"))
+        {
+            debugText = GameObject.Find("DebugText").GetComponent<Text>();
+        }
+    }
+
     void Start()
     {
         creativeMode = PlayerPrefs.GetInt("creativeMode") > 0;
@@ -214,6 +248,18 @@ public class GameController : MonoBehaviour {
 
     void Update()
     {
+        if(Input.GetKeyUp(KeyCode.L))
+        {
+            if(debugText.color != Color.red)
+            {
+                debugText.color = Color.red;
+            }
+            else
+            {
+                debugText.color = Color.clear;
+            }
+        }
+
         if(Input.GetButtonUp("Time Restore/Spawn"))
         {
             if(!creativeMode)
